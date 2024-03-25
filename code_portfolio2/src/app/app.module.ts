@@ -9,7 +9,8 @@ import { DataModule } from './data.module';
 @Module({
 	imports: [
 		MongooseModule.forRoot(
-			`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_HOST}/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`,
+			// `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_HOST}/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`,
+			`mongodb://127.0.0.1:27017/${process.env.MONGO_DATABASE}`
 		),
 		AuthModule,
 		DataModule,
