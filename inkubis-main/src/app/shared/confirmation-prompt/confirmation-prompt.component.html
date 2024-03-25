@@ -1,0 +1,18 @@
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id="main-text">Weet u zeker dat u dit wilt verwijderen?</p>
+                <p style="font-weight: 100;" *ngIf="optionalText && list?.length! > 0">{{optionalText}}</p>
+                <ul *ngIf="list">
+                    <li class="my-3" *ngFor="let item of list">{{item.name || item.title}}</li>
+                </ul>
+                <div class="float-end">
+                    <button class="primary-btn text-white bg-secondary m-2" data-bs-dismiss="modal"
+                        aria-label="Close">Annuleren</button>
+                    <button class="primary-btn" (click)="delete()">Verwijderen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

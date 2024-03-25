@@ -1,0 +1,40 @@
+h3 {
+  margin-bottom: 12px;
+}
+
+h4 {
+  margin-top: 12px;
+}
+
+.notBold {
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.card {
+  margin-bottom: 8px;
+  img {
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .field, .response {
+    padding: 8px;
+  } 
+
+  hr {
+    width: 98%;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+#organisation {
+  margin-bottom: 20px;
+  border: 0;
+}
+
+
+
+.noResponse {
+  margin-bottom: 40px !important;
+}

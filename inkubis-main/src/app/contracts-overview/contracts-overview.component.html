@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row mb-0">
+        <div class="">
+            <h2 class="d-inline">Contracten van <span class="orgNameStyle">{{organisation.name}}</span> <span
+                    class="mx-3">
+                    <button *ngIf="isAdmin" class="primary-btn" routerLink="/organisations/edit/{{organisation.id}}"><fa-icon
+                            [icon]="faPencil"></fa-icon></button>
+                    <button *ngIf="isAdmin" (click)="confirmationPrompt?.openModal(organisation.id!)" class="secondary-btn"><fa-icon [icon]="faTrash"></fa-icon></button>
+                </span>
+            </h2>
+            <button class="primary-btn float-end" routerLink="/contracts/create">
+                Contract aanmaken <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+
+        </div>
+
+        <div class=" my-5">
+            <p *ngIf="errorMessage != ''" style="color: red;">*{{errorMessage}}.</p>
+            <h5 class="m-0">Organisatieinformatie</h5>
+            <div class="row row-cols-2">
+                <div class="col">
+                    <p class="m-0"><fa-icon [icon]="faCompnay"></fa-icon> {{organisation.organisationIdentifier}}</p>
+                    <p class="m-0"> <fa-icon [icon]="faRep"></fa-icon> {{organisation.representative}}</p>
+
+                </div>
+
+                <div class="col">
+                    <p class="m-0"><fa-icon [icon]="faLocation"></fa-icon> {{organisation.address}},
+                        {{organisation.zipcode}} {{organisation.city}}
+                    </p>
+                    <p class="m-0"><fa-icon [icon]="faGlobe"></fa-icon> {{organisation.country}}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="contracts.length > 0" class="row row-cols-3 gy-4 pb-5">
+        <div *ngFor="let contract of contracts" class="col">
+            <div class="card p-3">
+                <div class="row">
+                    <div class="contractTitleCardPlace">
+                        <h3 id="contractTitleCardStyle">{{contract.title}}</h3>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <p class="mb-1 orgNameStyle">Contract {{contract.title}}</p>
+                    <p class="m-0"><fa-icon [icon]="faCalendarAlt"></fa-icon> <span
+                            style="margin-left: 11px;">{{contract.lastEditedDate | date: 'dd-MM-yyyy'}}</span></p>
+                    <p class="m-0"><fa-icon [icon]="faUserEdit"></fa-icon> <span
+                            style="margin-left: 5px;">{{contract.lastEditedBy.name}}</span></p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="float-end d-flex">
+                            <a class="openContractBtn" routerLink="/contract/detail/{{contract.id}}">Open</a>
+                            <app-contract-generate-button [iconOnly]="true"
+                                [contractId]="contract.id"></app-contract-generate-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p *ngIf="contracts.length <= 0">Er zijn nog geen contracten voor deze organisatie.</p>
+</div>
+<app-confirmation-prompt [deleteFunction]="deleteOrgById" [optionalText]="'De volgende contracten zullen niet meer zichtbaar zijn:'"
+    [list]="contracts"></app-confirmation-prompt>

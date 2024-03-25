@@ -1,0 +1,28 @@
+(getest met Node v20.11.1 (LTS versie))
+
+mongodb instantie draaiend MET authenticatie actief
+
+
+mongodb vulling:
+voor script "ATIx Informatica - Opleidingsdocumenten\Onderwijsontwikkeling\Periode 3.3\Security 2\2324\Portfolio opdrachten\portfolio opdracht 2 - app prep\seeddb.mongodb.js" uit
+(bv via mongodb playground in VS Code met MongoDB extensie)
+
+nestjs app:
+- unzip 'code_portfolio2_api_clean.zip'
+- gebruik node LTS versie
+- installeer dependencies:
+	npm i
+
+- vul .env bestand (in root van het project) met mongodb connectie gegevens
+(let op: als mongo draait op 'localhost', hostnaam werkt op de eoa manier niet vanuit nestjs, gebruik 127.0.0.1 als host)
+
+- start applicatie:
+	npm start
+	(of debug: npm run start:debug)
+	
+
+Requests (create entities etc):
+- Importeer de volgende collectie in Postman:
+"ATIx Informatica - Opleidingsdocumenten\Onderwijsontwikkeling\Periode 3.3\Security 2\2324\Portfolio opdrachten\portfolio opdracht 2 - app prep\P3.3_Security 2.postman_collection.json"
+- eerst login uitvoeren met een gebruiker die eerder is aangemaakt (bv beheerder@da.nl / Avans1234) om token op te halen
+	(token wordt opgeslagen als collectie variabele en bij volgende requests gebruikt)

@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="mb-2">
+            <h2 class="d-inline">Contract categoriëen</h2>
+            <button class="primary-btn d-inline float-end" routerLink="create">
+                Nieuwe categoriëen <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-8">Categorie</th>
+                    <th class="col-1"></th>
+                    <th class="col-1"></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let category of categories">
+                <tr>
+                    <td class="normalText col-8">{{category.name}}</td>
+                    <td class="col-1"><a style="color: gold;" routerLink="edit/{{category.id}}"><fa-icon
+                                [icon]="faPencilAlt"></fa-icon></a></td>
+                    <td class="col-1"><a (click)="openDeleteModal(category.id)"
+                            style="color: red; cursor: pointer;"><fa-icon [icon]="faTrash"></fa-icon></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<app-confirmation-prompt [deleteFunction]="deleteCategory" [optionalText]="'De volgende velden worden ook verwijderd:'"
+    [list]="deletedFields"></app-confirmation-prompt>

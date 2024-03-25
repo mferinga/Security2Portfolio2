@@ -1,0 +1,83 @@
+<div class="contractDetailPage">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <div>
+                <a class="backBtn" routerLink="/organisations/{{organisation.id}}">&lt; Terug naar
+                    {{organisation.name}}</a>
+                <h2>Contract: <span>{{contract.title}}</span></h2>
+            </div>
+            <div class="actionBtns">
+                <button class="primary-btn" routerLink="edit">Edit <fa-icon [icon]="faeditContract"></fa-icon></button>
+                <button (click)="confirmationPrompt?.openModal(contract.id)" class="secondary-btn">Delete <fa-icon
+                        [icon]="fatrash"></fa-icon></button>
+                <app-contract-generate-button [iconOnly]="false" [contractId]="contract.id"></app-contract-generate-button>
+            </div>
+        </div>
+        <div class="contractDetails">
+            <div>
+                <h5>Laatst gewijzigd:</h5>
+                <p class="m-0"><fa-icon [icon]="facalendar"></fa-icon> <span class="date-span">{{contract.lastEditedDate
+                        | date: 'dd/MM/yyyy HH:mm'}}</span></p>
+                <p><fa-icon [icon]="fauser"></fa-icon> <span class="user-span">{{contract.lastEditedBy.name}}</span></p>
+            </div>
+            <div>
+                <h5>Signeer gegevens:</h5>
+                <p class="m-0">
+                    Locatie van tekenen: {{ contract.locationOfSigning }}
+                </p>
+                <p>
+                    Datum van tekenen:
+                    {{ contract.dateOfSigning | date : "dd-MM-yyyy" }}
+                </p>
+            </div>
+        </div>
+        <div class="d-flex mb-4 information">
+            <div class="card p-3 me-4">
+                <h5>Klant informatie</h5>
+                <p class="m-0">Naam: {{ contract.customer.name }}</p>
+                <p>Baanpositie: {{ contract.customer.jobTitle }}</p>
+                <h6>Locatiegegevens:</h6>
+                <p class="m-0">Adres: {{ contract.customer.address }}</p>
+                <p class="m-0">Postcode: {{ contract.customer.postalCode }}</p>
+                <p class="m-0">Stad: {{ contract.customer.city }}</p>
+                <p>Land: {{ contract.customer.country }}</p>
+            </div>
+            <div class="card p-3">
+                <h5>Leverancier informatie</h5>
+                <p class="m-0">Naam: {{ contract.supplier.name }}</p>
+                <p class="m-0">Baanpositie: {{ contract.supplier.jobTitle }}</p>
+                <p class="m-0">Emailadres: {{ contract.supplier.email }}</p>
+                <p>Organisatie: {{ organisation.name }}</p>
+            </div>
+        </div>
+        <div *ngIf="sortedArray.length > 0">
+            <h5>Details die in het contract komen</h5>
+            <div *ngFor="let obj of sortedArray">
+                <div *ngIf="obj.responses">
+                    <div *ngIf="obj.responses.length">
+                        <p class="m-0 mb-2 mt-3">
+                            <b>{{ obj.category }}</b>
+                        </p>
+                        <div class="d-flex response" *ngFor="let response of obj.responses">
+                            <fa-icon [icon]="faCheck"></fa-icon>
+                            <div class="ms-3 card">
+                                <p class="m-0 field">
+                                    {{ response.field!.name }}
+                                </p>
+                                <div *ngIf="response.field!.isSpecifiable">
+                                    <div *ngIf="response.data">
+                                        <hr class="mx-auto" />
+                                        <p class="m-0 specification">
+                                            Specificatie: {{ response.data }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-confirmation-prompt [deleteFunction]="deleteContract"></app-confirmation-prompt>

@@ -1,0 +1,50 @@
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";
+
+$primary: #280223;
+$secondary: #ffff00;
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  font-style: normal;
+  background-color: white;
+  color: #0e0e0e;
+}
+
+.form-control {
+  padding: 9px;
+  border-radius: 0;
+}
+
+.primary-btn {
+  background-color: $secondary;
+  color: $primary;
+  border-radius: 0;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+
+  &:disabled {
+    background-color: grey;
+  }
+}
+
+.secondary-btn {
+  background-color: $primary;
+  color: $secondary;
+  border-radius: 0;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+
+  &:disabled {
+    background-color: grey;
+  }
+}

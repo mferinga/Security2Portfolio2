@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="mb-1">
+      <h2 *ngIf="!isEdit" class="d-inline">Template aanmaken</h2>
+      <h2 *ngIf="isEdit" class="d-inline">Template bewerken</h2>
+    </div>
+  </div>
+  <div>
+    <div class="row py-2">
+      <form (ngSubmit)="onSubmit()" #createTemplateForm="ngForm">
+        <input *ngIf="isEdit" type="hidden" [(ngModel)]="template.id">
+        <div class="form-field">
+          <label for="name" class="form-label">Naam template</label>
+          <input required class="form-control pe-5" [(ngModel)]="template.name" type="text" name="name" id="name"
+            placeholder="Typ hier de template naam in" #name="ngModel" (ngModelChange)="changeName($event)" />
+            <p *ngIf="!name.valid && name.touched" style="color: red;">*Vul een template naam in.</p>
+        </div>
+        <div class="form-field">
+          <label for="logo" class="form-label">Template afbeelding</label>
+          <input required class="form-control" type="file" accept="image/*" name="logo" id="imageCapturer"
+            #logo="ngModel" [(ngModel)]="imgSrc" (change)="useImage($event)" />
+            <p *ngIf="!logo.valid && logo.touched" style="color: red;">*Vul een template naam in.</p>
+        </div>
+        <div *ngIf="imgSrc">
+          <div class="form-field">
+            <p for="logo" class="form-label">Huidige template afbeelding</p>
+            <img class="w-25" [src]="imageBase64" alt="Template afbeelding" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="content">Template style</label>
+          <!-- <editor name="content" [(ngModel)]="template.content" (ngModelChange)="validateTiny($event)"
+            #content="ngModel" apiKey="{{apiKey}}"></editor> -->
+          <textarea id="textarea"></textarea>
+        </div>
+        <div class="form-field mt-4 row">
+          <div>
+            <div *ngIf="isEdit">
+              <div class="d-flex justify-content-end">
+                <button type="submit" id="templateUpdateBtn" disabled class="primary-btn">Opslaan</button>
+              </div>
+            </div>
+            <div *ngIf="!isEdit">
+              <div class="d-flex justify-content-end">
+                <button type="submit" id="templateCreateBtn" disabled class="primary-btn">Template aanmaken</button>
+              </div>
+              <!-- <div class="d-flex justify-content-end" *ngIf="!validTiny">
+                <button [disabled]="!validTiny" class="primary-btn">Template aanmaken</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+@import 'src/styles';
+
+.orgNameStyle {
+    color: #c95478;
+}
+
+.card {
+    border-radius: 0;
+
+    hr {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .contractTitleCardPlace {
+        height: 95px;
+    }
+    
+    #contractTitleCardStyle {
+        text-align: center;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .openContractBtn {
+        position: relative;
+        padding-top: 10px;
+        text-decoration: none;
+        color: black;
+        font-weight: 500;
+        margin-right: 15px;
+        font-size: 17px;
+        
+        &:hover {
+            text-decoration: underline black;
+        }
+    }
+}

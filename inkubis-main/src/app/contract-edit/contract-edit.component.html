@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="row">
+        <h2>Edit contract</h2>
+    </div>
+    <div class="row">
+        <form #editContractForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="mb-4">
+                <label for="title">Contract titel</label>
+                <input [(ngModel)]="editContract.title" name="title" #title="ngModel" class="form-control" type="text"
+                    [value]="oldContract.title" required>
+
+                <label class="mt-2" for="supplier">Leverancier</label>
+                <select [(ngModel)]="editContract.supplier" name="supplier" class="form-select supplierSelectBtn"
+                    (change)="onSupplierChange()" required>
+                    <option [ngValue]='editContract.supplier' value="{{oldContract.supplier}}">
+                        {{oldContract.supplier.name}}</option>
+                    <option *ngFor="let user of usersFromOrganisation" [ngValue]='user' value="{{user.name}}">
+                        {{user.name}}</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <h4>Klantinformatie</h4>
+                <label for="customerName">Naam</label>
+                <input [(ngModel)]="editContract.customer.name" name="customerName" #customerName="ngModel"
+                    class="form-control" type="text" [value]="oldContract.customer.name" required>
+                <label class="mt-2" for="jobTitle">Baanpositie</label>
+                <input [(ngModel)]="editContract.customer.jobTitle" name="customerJobTitle" #jobTitle="ngModel"
+                    class="form-control" type="text" [value]="oldContract.customer.jobTitle" required>
+            </div>
+
+            <div class="mb-4">
+                <h5>Locatiegegevens</h5>
+                <div class="row row-cols-2">
+                    <div class="col mt-2">
+                        <label for="address">Adres</label>
+                        <input [(ngModel)]="editContract.customer.address" name="customerAddress" #address="ngModel"
+                            class="form-control" type="text" [value]="oldContract.customer.address" required>
+                    </div>
+                    <div class="col mt-2">
+                        <label for="city">Stad</label>
+                        <input [(ngModel)]="editContract.customer.city" name="customerCity" #city="ngModel"
+                            class="form-control" type="text" [value]="oldContract.customer.city" required>
+                    </div>
+                    <div class="col mt-2">
+                        <label for="postalCode">Postcode</label>
+                        <input [(ngModel)]="editContract.customer.postalCode" name="customerPostalCode"
+                            #postalCode="ngModel" class="form-control" type="text"
+                            [value]="oldContract.customer.postalCode" required>
+                    </div>
+                    <div class="col mt-2">
+                        <label for="country">Land</label>
+                        <input [(ngModel)]="editContract.customer.country" name="customerCountry" #country="ngModel"
+                            class="form-control" type="text" [value]="oldContract.customer.country" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h4>Signeergegevens</h4>
+                <label for="oldDateOfSigning">Datum van tekenen: {{oldContract.dateOfSigning | date:
+                    'dd-MM-yyyy'}}</label>
+                <input [(ngModel)]="editContract.dateOfSigning" name="dateOfSigning" #dateOfSigning="ngModel"
+                    class="form-control" type="date" required>
+                <label class="mt-2" for="locationOfSigning">Locatie van tekenen</label>
+                <input [(ngModel)]="editContract.locationOfSigning" name="locationOfSigning"
+                    #locationOfSigning="ngModel" class="form-control" type="text"
+                    [value]="oldContract.locationOfSigning" required>
+            </div>
+            <div class="mb-4" *ngFor="let category of fieldsByCategory">
+                <h3>{{ category.categoryName }}</h3>
+                <div *ngFor="let field of category.fields">
+                    <div id="{{ field.name }}" #fieldGroup>
+                        <div class="d-flex mb-2">
+                            <div class="checkbox">
+                                <input type="checkbox" id="{{ field.id }}" name="{{ field.name }}check" class="me-3"
+                                    #inputCheckbox (change)="
+                      eventValueChecker(
+                        $event,
+                        inputCheckbox,
+                        field.isSpecifiable ? ta : '',
+                        null
+                      )
+                    " />
+                                <span class="overlay"></span>
+                            </div>
+                            <label class="checkbox-label" for="{{ field.id }}">{{
+                                field.name
+                                }}</label>
+                        </div>
+                        <div class="row textarea-row" #ta>
+                            <textarea *ngIf="field.isSpecifiable" placeholder="Specificeer (niet verplicht)"
+                                name="{{ field.name }}ta" [class]="inputCheckbox.checked ? 'visible' : 'invisible'"
+                                id="{{ field.id }}" cols="60" rows="3" required minlength="1"
+                                [disabled]="!inputCheckbox.checked"
+                                (change)="textAreaValueChecker($event, ta)"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-5">
+                <button class="primary-btn me-2" [disabled]="!editContractForm.valid" type="submit">Contract
+                veranderen</button>
+                <button class="secondary-btn" routerLink="/contract/detail/{{oldContract.id}}">Terug</button>
+            </div>
+        </form>
+    </div>
+</div>

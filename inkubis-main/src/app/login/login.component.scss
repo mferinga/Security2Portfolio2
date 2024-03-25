@@ -1,0 +1,45 @@
+@import 'src/styles.scss';
+
+.background {
+  background-color: $primary;
+  width: 100vw;
+  height: 100vh;
+}
+
+.loginPlace {
+  background-color: $primary;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+}
+
+.logo {
+  position: relative;
+  left: -16px;
+}
+
+.logInText {
+    color: $secondary;
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 49px;
+}
+
+.form-control {
+    border-radius: 0;
+}
+.form-label {
+    margin-top: 10px;
+}
+
+.wrong-login-message {
+    margin-top: 10px;
+    color: red;
+}
+
+.login-btn {
+    margin-top: 20px;
+}

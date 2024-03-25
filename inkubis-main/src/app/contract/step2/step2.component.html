@@ -1,0 +1,163 @@
+<div>
+    <form action="" #step2form="ngForm" id='step2form'>
+        <div class="mb-4 input-validation">
+            <label for="title">Naam van contract</label>
+            <input
+                [ngClass]="(contractName.value == '' && (contractName.dirty || contractName.touched)) ? 'error-input' : ''"
+                class="form-control pe-5 mb-2" type="text" name="title" id="title" [(ngModel)]="contract.title" required
+                #contractName="ngModel" />
+            <p class="" *ngIf="(contractName.value == '' && (contractName.dirty || contractName.touched))">
+                *Contractnaam van
+                tekenen is
+                nog niet correct
+                ingevuld</p>
+            <label for="supplier">Leverancier</label>
+            <select [(ngModel)]="contract.supplier" name="supplier" class="form-select supplierSelectBtn" (change)="onSupplierChange()" required>
+                <option [ngValue]='contract.supplier' value="{{contract.supplier}}">{{contract.supplier.name}}</option>
+                <option *ngFor="let user of usersFromOrganisation" [ngValue]='user' value="{{user.name}}">{{user.name}}
+                </option>
+            </select>
+        </div>
+        <div class="mb-4">
+            <h3>Klantinformatie</h3>
+            <div class="input-validation">
+                <label for="customerName">Naam</label>
+                <input class="form-control pe-5"
+                    [ngClass]="(customerInformation.value == '' && (customerInformation.dirty || customerInformation.touched)) ? 'error-input' : ''"
+                    type="text" name="customerName" id="customerName" required [(ngModel)]="contract.customer.name"
+                    #customerInformation="ngModel" />
+                <p class=""
+                    *ngIf="(customerInformation.value == '' && (customerInformation.dirty || customerInformation.touched))">
+                    *Klantnaam van
+                    tekenen is
+                    nog niet correct
+                    ingevuld</p>
+            </div>
+            <div class="mt-2 input-validation">
+                <label for="customerJobtitle">Baanpositie</label>
+                <input class="form-control pe-5" type="text" name="customerJobtitle" id="customerJobtitle" required
+                    [(ngModel)]="contract.customer.jobTitle" #customerJobTitle="ngModel"
+                    [ngClass]="(customerJobTitle.value == '' && (customerJobTitle.dirty || customerJobTitle.touched)) ? 'error-input' : ''" />
+                <p class=""
+                    *ngIf="(customerJobTitle.value == '' && (customerJobTitle.dirty || customerJobTitle.touched))">
+                    *Baanpositie van
+                    tekenen is
+                    nog niet correct
+                    ingevuld</p>
+            </div>
+        </div>
+        <div class="mb-4">
+            <div class="row row-cols-2">
+                <div class="col input-validation">
+                    <label for="customerAddress">Adres</label>
+                    <input class="form-control pe-5" type="text"
+                        [ngClass]="(customerAddress.value == '' && (customerAddress.dirty || customerAddress.touched)) ? 'error-input' : ''"
+                        name="customerAddress" id="customerAddress" required [(ngModel)]="contract.customer.address"
+                        #customerAddress="ngModel" />
+                    <p class=""
+                        *ngIf="(customerAddress.value == '' && (customerAddress.dirty || customerAddress.touched))">
+                        *Adres van
+                        tekenen is
+                        nog niet correct
+                        ingevuld</p>
+                </div>
+                <div class="col input-validation">
+                    <label for="customerPostalCode">Postcode</label>
+                    <input class="form-control pe-5"
+                        [ngClass]="(customerPostalCode.value == '' && (customerPostalCode.dirty || customerPostalCode.touched)) ? 'error-input' : ''"
+                        type="text" name="customerPostalCode" id="customerPostalCode" required
+                        [(ngModel)]="contract.customer.postalCode" #customerPostalCode="ngModel" />
+                    <p class=""
+                        *ngIf="(customerPostalCode.value == '' && (customerPostalCode.dirty || customerPostalCode.touched))">
+                        *Postcode van
+                        tekenen is
+                        nog niet correct
+                        ingevuld</p>
+                </div>
+                <div class="col mt-2 input-validation">
+                    <label for="customerCity">Plaats</label>
+                    <input class="form-control pe-5"
+                        [ngClass]="(customerCity.value == '' && (customerCity.dirty || customerCity.touched)) ? 'error-input' : ''"
+                        type="text" name="customerCity" id="customerCity" required [(ngModel)]="contract.customer.city"
+                        #customerCity="ngModel" />
+                    <p class=""
+                        *ngIf="(customerCity.errors?.['minlength'] )|| (customerCity.value == '' && (customerCity.dirty || customerCity.touched))">
+                        *Stad van
+                        tekenen is
+                        nog niet correct
+                        ingevuld</p>
+                </div>
+                <div class="col mt-2 input-validation">
+                    <label for="customerCountry">Land</label>
+                    <input
+                        [ngClass]="(customerCountry.errors?.['required'] )|| (customerCountry.value == '' && (customerCountry.dirty || customerCountry.touched)) ? 'error-input' : ''"
+                        class="form-control pe-5" type="text" name="customerCountry" id="customerCountry" required
+                        [(ngModel)]="contract.customer.country" #customerCountry="ngModel" />
+                    <p class=""
+                        *ngIf="(customerCountry.value == '' && (customerCountry.dirty || customerCountry.touched))">
+                        *Locatie van
+                        tekenen is
+                        nog niet correct
+                        ingevuld</p>
+                </div>
+            </div>
+        </div>
+        <div class="mb-4">
+            <h3>Signeergegevens</h3>
+            <div class="row row-cols-2">
+                <div class="col">
+                    <label for="signDate">Datum van tekenen</label>
+                    <input class="form-control pe-5" type="date" name="signDate" id="signDate" required
+                        [(ngModel)]="contract.dateOfSigning" #dateOfSigning="ngModel" placeholder="test" />
+
+                </div>
+            </div>
+
+            <div class="col input-validation">
+                <label for="signCity">Locatie van tekenen</label>
+                <input class="form-control pe-5"
+                    [ngClass]="(signCity.errors?.['minlength'] )|| (signCity.value == '' && (signCity.dirty || signCity.touched)) ? 'error-input' : ''"
+                    type="text" name="signCity" id="signCity" required [(ngModel)]="contract.locationOfSigning"
+                    #signCity="ngModel" minlength="1" />
+                <p class=""
+                    *ngIf="(signCity.errors?.['minlength'] )|| (signCity.value == '' && (signCity.dirty || signCity.touched))">
+                    *Locatie van
+                    tekenen is
+                    nog niet correct
+                    ingevuld</p>
+            </div>
+
+        </div>
+
+        <div class="mb-4" *ngFor="let category of fieldsByCategory">
+            <h3>{{ category.categoryName }}</h3>
+            <div *ngFor="let field of category.fields">
+                <div id="{{ field.name }}" #fieldGroup>
+                    <div class="d-flex mb-2">
+                        <div class="checkbox">
+                            <input type="checkbox" id="{{ field.id }}" name="{{ field.name }}check" class="me-3"
+                                #inputCheckbox (change)="
+                  eventValueChecker(
+                    $event,
+                    inputCheckbox,
+                    field.isSpecifiable ? ta : '',
+                    null
+                  )
+                " />
+                            <span class="overlay"></span>
+                        </div>
+                        <label class="checkbox-label" for="{{ field.id }}">{{
+                            field.name
+                            }}</label>
+                    </div>
+                    <div class="row textarea-row" #ta>
+                        <textarea *ngIf="field.isSpecifiable" placeholder="Specificeer (niet verplicht)"
+                            name="{{ field.name }}ta" [class]="inputCheckbox.checked ? 'visible' : 'invisible'"
+                            id="{{ field.id }}" cols="60" rows="3" required minlength="1"
+                            [disabled]="!inputCheckbox.checked" (change)="textAreaValueChecker($event, ta)"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

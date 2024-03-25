@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="mb-4">
+      <h2 class="d-inline">Uw organisaties</h2>
+      <button class="primary-btn float-end" routerLink="create" *ngIf="isAdmin">
+        Nieuwe organisatie
+        <fa-icon [icon]="faPlus"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div>
+  </div>
+  <div class="row row-cols-3 gy-4 pb-5">
+    <div *ngFor="let org of organisations" class="col">
+      <div class="card p-3">
+        <div class="row">
+          <img src="{{ org.organisationImage }}" alt="" />
+          <div class="name">
+            <p class="m-0">{{ org.name }}</p>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div>
+            <p class="m-0">
+              <fa-icon [icon]="faPeople"></fa-icon>
+              <span *ngIf="org.usersCount > 1 || org.usersCount == 0" class="people-span">{{ org.usersCount }}
+                medewerkers</span>
+              <span *ngIf="!(org.usersCount > 1 || org.usersCount == 0)" class="people-span">{{ org.usersCount }}
+                medewerker</span>
+            </p>
+            <p>
+              <fa-icon [icon]="faContract"></fa-icon>
+              <span *ngIf="org.contractCount > 1 || org.contractCount == 0" class="contract-span">{{ org.contractCount
+                }} contracten</span>
+              <span *ngIf="!(org.contractCount > 1 || org.contractCount == 0)" class="contract-span">{{
+                org.contractCount }} contract</span>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="d-inline float-end primary-btn info" routerLink="{{org.id}}">
+              Meer info
+              <fa-icon [icon]="faArrow"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

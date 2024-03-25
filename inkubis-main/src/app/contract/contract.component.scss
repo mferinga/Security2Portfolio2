@@ -1,0 +1,67 @@
+* {
+  font-weight: 500;
+}
+h2 {
+  color: #280223;
+}
+.stepBar {
+  text-align: center;
+  justify-content: space-around;
+  font-size: 25px;
+}
+
+.step {
+  justify-content: space-around;
+  position: relative;
+  align-items: center;
+}
+
+.stepNumber {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  align-items: center;
+  text-align: center;
+}
+
+.stepLine {
+  width: 70px;
+  height: 10px;
+  border-radius: 12px;
+}
+
+.stepToDo {
+  .stepLine,
+  .stepNumber {
+    background-color: #bdbdbd;
+  }
+  .stepContent {
+    color: #bdbdbd;
+  }
+}
+
+.stepInProgress {
+  .stepLine,
+  .stepNumber {
+    background-color: #c096b3;
+  }
+  .stepContent {
+    color: #c096b3;
+  }
+}
+
+.stepCompleted {
+  .stepLine,
+  .stepNumber {
+    background-color: #c95478;
+  }
+  .stepContent {
+    color: #c95478;
+  }
+}
+
+.switchBtns {
+  position: fixed;
+  bottom: 0;
+  width: 67%;
+}

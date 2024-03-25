@@ -1,0 +1,45 @@
+@import 'src/styles';
+
+* {
+  font-weight: 600 !important;
+}
+.card {
+  border-radius: 0;
+
+  hr {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  img {
+    height: 120px;
+
+    object-fit: contain;
+  }
+  color: $primary;
+
+}
+.contract-span {
+  padding-left: 16px;
+}
+.people-span {
+  padding-left: 10px;
+
+}
+h2 {
+  color: $primary;
+}
+
+
+.name p {
+  background-color: $primary;
+  color: white;
+  padding: 3px 12px;
+  width: fit-content;
+}
+.container{
+  background-color: white !important;
+
+}
+.pointer {
+  cursor: pointer;
+}

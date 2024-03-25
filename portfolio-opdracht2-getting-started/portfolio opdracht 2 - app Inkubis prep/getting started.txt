@@ -1,0 +1,29 @@
+(getest met Node v20.11.1 (LTS versie))
+
+mongodb initialisatie gedaan (minimaal gebruikers aangemaakt, entiteit vulling optioneel)
+
+
+angular app:
+- unzip inkubis-main.zip
+- gebruik node LTS versie
+- installeer dependencies:
+	'npm i'
+- installeer angular tools
+	'npm install -g @angular/cli'
+
+- maak account aan voor TinyMCE API en kopieer API key (of gebruik onderstaande)
+	https://www.tiny.cloud
+- maak api key in project bekend
+	maak directory en bestand 'src/environments/environment.ts'
+	vul met environment (gebruik eventueel eigen API key):
+		export const environment = {
+			production: false,
+			tiny_api_key: 'qia0koonqpaycwywnpfack1x82yrlw68l8f9rl87trje29zc'
+		}
+
+- start applicatie:
+	ng serve
+	(of 'npm run start')
+
+- api url is hardcoded en gaan naar 'localhost:3333'
+- login met 'beheerder@da.nl' of andere account aangemaakt in API setup

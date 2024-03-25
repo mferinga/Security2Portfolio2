@@ -1,0 +1,76 @@
+@import '../../../styles';
+
+nav {
+  background-color: $primary;
+  margin: 0;
+  padding: 0;
+  width: 300px;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.active {
+  color: $secondary;
+}
+
+a, .logoutBtn {
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover {
+    color: $secondary;
+    transition: 0.4s;
+  }
+}
+
+img {
+  width: 252px;
+  height: auto;
+  margin: 24px 0 0 24px;
+}
+
+.top-links, .bottom-links {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 24px;
+  font-size: 1.4rem;
+}
+
+.link-text {
+  position: relative;
+  bottom: 2px;
+  left: 5px;
+}
+
+.top-links {
+  margin-top: 40px;
+}
+
+.bottom-links {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 24px;
+}
+
+fa-icon {
+  margin-right: 8px;
+  font-size: 28px;
+}
+
+.lessImportantLinks {
+  margin-top: 50px;
+
+  .headerString {
+    color: #C096B3;
+    font-size: 15px;
+  }
+}
+
+.aLessImportantLink {
+  font-size: 18px;
+  fa-icon {
+    font-size: 22px;
+  }
+}

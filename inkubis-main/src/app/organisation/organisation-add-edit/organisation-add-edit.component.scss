@@ -1,0 +1,23 @@
+$purple: #280223;
+$yellow: #FFFF00;
+
+.form-field {
+    // width: 60%;
+    margin-top: 20px;
+    label {
+        margin-bottom: 0;
+    }
+    input {
+        border-radius: 0;
+        border-color: $purple;
+        &:focus-visible{
+
+            outline: none;
+        }
+    }
+}
+.container{
+    color: $purple;
+    background-color: white !important;
+    font-weight: 600;
+  }

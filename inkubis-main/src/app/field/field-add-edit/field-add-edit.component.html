@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <div class="mb-4">
+            <h2 *ngIf="!fieldExists" class="d-inline">Nieuw veld aanmaken</h2>
+            <h2 *ngIf="fieldExists" class="d-inline">Edit veld</h2>
+        </div>
+    </div>
+    <div class="row">
+        <form #newFieldForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="name" class="form-label">Veld naam: </label>
+                <input [(ngModel)]="field.name" #name="ngModel" name="name" type="text" class="form-control" id="name" [value]="field.name" required minlength="1" placeholder="bv: (potentiële) / (ex)klanten">
+                <p *ngIf="!name.valid && name.touched" style="color:red">*Vul een naam in.</p>
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Shortcode: </label>
+                <input [(ngModel)]="field.shortcodeName" #shortcodeName="ngModel" name="shortcodeName" type="text" class="form-control" id="shortcodeName" [value]="field.shortcodeName" required minlength="1" pattern="[a-z-]+" placeholder="bv: aanraking-klanten">
+                <div *ngIf="!shortcodeName.valid && shortcodeName.dirty" style="color:red">*Vul een valide shortcode.
+                    <ul>
+                        <li>Vul een shortcode in.</li>
+                        <li>Alleen kleine letters en - zijn te gebruiken.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="mb-2" for="category">Categorie:</label>
+                <select class="form-select" [(ngModel)]="field.category.id" #category="ngModel" name="{{field.category}}" required>
+                    <option *ngFor="let category of categories" [selected]="category == field.category" [ngValue]="category.id">{{category.name}}</option>
+                </select>
+                <p *ngIf="!category.valid && category.touched" style="color:red">*Kies een categorie.</p>
+            </div>
+            <div class="mb-3">
+                <label class="mb-2 me-2" for="isSpecifiable">Is het veld specificeerbaar?</label><br>
+                <div class="checkbox">
+                    <input
+                    type="checkbox"
+                    name="{{field.isSpecifiable}}"
+                    class="me-3"
+                    [checked]="field.isSpecifiable"
+                    #inputCheckbox
+                    [(ngModel)]="field.isSpecifiable"
+                    />
+                    <span class="overlay"></span>
+                </div>
+            </div>
+
+            <p *ngIf="fieldNameAlreadyExists" style="color: red;">*Combinatie van veld naam en categorie is al in gebruik.</p>
+
+            <button *ngIf="!fieldExists" [disabled]="!newFieldForm.valid" type="submit" class="primary-btn">Veld toevoegen</button>
+            <button *ngIf="fieldExists" [disabled]="!newFieldForm.valid" type="submit" class="primary-btn">Veld veranderen</button>
+            <button class="secondary-btn ms-2" routerLink="/fields" >Terug</button>
+        </form>
+    </div>
+</div>

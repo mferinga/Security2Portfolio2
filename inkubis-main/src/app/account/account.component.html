@@ -1,0 +1,80 @@
+<div class="accountPage">
+    <div class="row">
+        <h3>Account Details</h3>
+        <p>Welkom {{loggedInUser.name}}!</p>
+    </div>
+    <div class="row">
+        <p>
+            <b>Volledige naam:</b><br>
+            {{loggedInUser.name}}
+        </p>
+        <p>
+            <b>Email adres:</b><br>
+            {{loggedInUser.email}}
+        </p>
+        <p>
+            <b>Baanpositie:</b><br>
+            {{loggedInUser.jobTitle}}
+        </p>
+        <div *ngIf="loggedInUser.role != 'admin'">
+            <b>Organisatie(s):</b><br>
+            <ul>
+                <li *ngFor="let org of loggedInUser.organisations">{{org.name}}</li>
+            </ul>
+        </div>
+        <div *ngIf="loggedInUser.role == 'admin'">
+            <b>Organisatie(s):</b><br>
+            <p style="color: grey">Alle organisaties</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="primary-btn changeBtn mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#editUserCanvas" aria-controls="editUserCanvas">Gegevens aanpassen</button>
+            <span class="updateMessage" *ngIf="contentUpdateMessage != ''">{{contentUpdateMessage}}</span>
+        </div>
+    </div>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="editUserCanvas" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Account Details Aanpassen</h5>
+        <button type="button" id="closeEditUserOffCanvasBtn" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form #editUserForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="name" class="form-label">Naam:</label>
+                <input [(ngModel)]="editUser.name" #name="ngModel" name="name" type="text" class="form-control" id="name" [value]="loggedInUser.name" required minlength="1">
+                <p *ngIf="!name.valid && name.touched" style="color:red">*Vul een naam in.</p>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email-adres:</label>
+                <input [(ngModel)]="editUser.email" #email="ngModel" name="email" type="email" class="form-control" id="email" [value]="loggedInUser.email" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,4}$">
+                <p *ngIf="!email.valid && email.touched" style="color:red">*Vul een valide email-adres in.</p>
+            </div>
+            <p>
+                <b>Wachtwoord:</b><br>
+                Om uw wachtwoord aan te kunnen passen moet u eerst het oude wachtwoord invoeren.
+                Neem contact met de administrator op als u uw oude wachtwoord niet meer weet.
+            </p>
+            <div class="mb-3">
+                <label for="oldPassword" class="form-label">Uw oude wachtwoord:</label>
+                <input [(ngModel)]="oldPassword" #oldPasswordInput="ngModel" name="oldPassword" type="password" class="form-control" id="oldPassword" placeholder="Type hier uw oude wachtwoord" minlength="6">
+                <p *ngIf="!oldPasswordInput.valid && oldPasswordInput.touched" style="color:red">*Minimaal 6 karakters.</p>
+            </div>
+            <div class="mb-3">
+                <label for="newPassword" class="form-label">Uw nieuwe wachtwoord:</label>
+                <input [disabled]="oldPassword == ''" [(ngModel)]="newPassword" #newPasswordInput="ngModel" name="newPassword" type="password" class="form-control" id="newPassword" placeholder="Type hier uw nieuwe wachtwoord" minlength="6">
+                <p *ngIf="!newPasswordInput.valid && newPasswordInput.touched" style="color:red">*Minimaal 6 karakters.</p>
+            </div>
+            <div class="mb-3">
+                <label for="newConfirmPassword" class="form-label">Bevestig uw nieuwe wachtwoord:</label>
+                <input [disabled]="oldPassword == ''" [(ngModel)]="newConfirmPassword" #newConfirmPasswordInput="ngModel" name="newConfirmPassword" type="password" class="form-control" id="newConfirmPassword" placeholder="Bevestig hier uw nieuwe wachtwoord" minlength="6">
+                <p *ngIf="!newConfirmPasswordInput.valid && newConfirmPasswordInput.touched" style="color:red">*Minimaal 6 karakters.</p>
+            </div>
+            <button [disabled]="!editUserForm.valid || (newConfirmPassword != newPassword)" type="submit" class="primary-btn changeBtn">Gegevens aanpassen</button>
+            
+            <p style="color: red;" *ngIf="newConfirmPassword != newPassword">*Het bevestigde wachtwoord is niet hetzelfde!</p>
+            <p style="color: red;" *ngIf="errorMessage != ''">*{{errorMessage}}</p>
+        </form>
+    </div>
+    </div>
+</div>

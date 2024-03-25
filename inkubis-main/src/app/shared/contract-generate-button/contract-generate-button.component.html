@@ -1,0 +1,14 @@
+<!-- <button class="primary-btn">Exporteer <fa-icon [icon]="faDownload"></fa-icon></button><br /><br /> -->
+
+<div class="row">
+	<div class="col">
+		<div ngbDropdown class="d-inline-block">
+			<button type="button" class="primary-btn" [ngClass]="{'hideDownArrow' : iconOnly}" ngbDropdownToggle>
+				<fa-icon [icon]="faDownload"></fa-icon> <span *ngIf="!iconOnly"> Exporteer</span>
+			</button>
+			<div ngbDropdownMenu>
+				<button *ngFor="let template of templates" (click)="downloadContractByTemplate(template.id)" ngbDropdownItem><fa-icon [icon]="faDownload"></fa-icon> {{template.name}}</button>
+			</div>
+		</div>
+	</div>
+</div>

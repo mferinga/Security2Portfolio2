@@ -1,0 +1,17 @@
+@import 'src/styles.scss';
+
+#purple-top-bar {
+  background-color: $primary;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.main-content {
+  margin-left: 300px;
+}
+
+.router-container {
+  margin: 28px 0 0 23px;
+  max-width: 100%;
+}

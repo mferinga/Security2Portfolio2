@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="mb-2">
+      <h2 class="d-inline">Gebruikers overzicht</h2>
+      <button class="primary-btn d-inline float-end" routerLink="create">
+        Nieuwe gebruiker <fa-icon [icon]="faPlus"></fa-icon>
+      </button>
+      <p *ngIf="errorMessage != ''" style="color: red;">*{{errorMessage}}.</p>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-2">Naam</th>
+          <th class="col-2">Email</th>
+          <th class="col-1">Rol</th>
+          <th class="col-1">Functie</th>
+          <th class="col-1">Organisaties</th>
+          <th class="col-2"></th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let user of users">
+        <tr>
+          <td class="normalText col-2">{{user.name}}</td>
+          <td class="col-2">{{user.email}}</td>
+          <td class="col-1">{{user.role}}</td>
+          <td class="col-1">{{user.jobTitle}}</td>
+          <td class="col-2" *ngIf="user.organisations.length > 1  && user.role != 'admin'">
+            <span *ngFor="let org of user.organisations"><span
+                *ngIf="!(isLastInOrgArray(user, org))">{{org.name}},&nbsp;</span><span
+                *ngIf="(isLastInOrgArray(user, org))">{{org.name}}&nbsp;</span></span>
+          </td>
+          <td class="col-2" *ngIf="user.organisations.length <= 1 && user.role != 'admin'">
+            <span *ngFor="let org of user.organisations">{{org.name}}&nbsp;</span>
+          </td>
+          <td *ngIf="user.role == 'admin'" class="col-2" style="color: grey;">Alle organisaties</td>
+          <td class="col-2">
+            <a style="color: gold; margin-right: 20px;" routerLink="edit/{{user.id}}"><fa-icon [icon]="faPencilAlt"></fa-icon></a>
+            <a style="color: red;" (click)="confirmationPrompt?.openModal(user.id)"><fa-icon
+                [icon]="faTrash"></fa-icon></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-confirmation-prompt [deleteFunction]="deleteUserById"></app-confirmation-prompt>

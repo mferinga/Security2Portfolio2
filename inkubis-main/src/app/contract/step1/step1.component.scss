@@ -1,0 +1,31 @@
+@import "src/styles.scss";
+
+.card {
+  border-radius: 0;
+  color: $primary;
+  transition: 0.2s;
+  hr {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  img {
+    height: 120px;
+    object-fit: contain;
+  }
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-8px);
+    border: solid 2px $primary;
+  }
+}
+
+.name p {
+  background-color: $primary;
+  color: white;
+  padding: 3px 12px;
+  width: fit-content;
+}
+
+.selected {
+  border: solid 2px $primary;
+}

@@ -1,0 +1,55 @@
+<nav>
+  <img style="cursor: pointer;" routerLink="/organisations" src="../../../assets/img/logo.png" alt="Inkubis Logo" />
+  <ul class="top-links">
+    <li class="mb-3">
+      <a routerLink="contracts/create" routerLinkActive="active" (click)="startNewContract()">
+        <fa-icon style="margin-right: 1px;" [icon]="faFile"></fa-icon>
+        <fa-icon style="font-size: 12px; margin: 0;" [icon]="faPlus"></fa-icon>
+        <span class="link-text">Contract Aanmaken</span>
+      </a>
+    </li>
+    <li class="mb-3">
+      <a routerLink="organisations" routerLinkActive="active">
+        <fa-icon [icon]="faBuilding"></fa-icon>
+        <span class="link-text">Organisaties</span>
+      </a>
+    </li>
+    <li class="mb-3" *ngIf="isAdmin">
+      <a routerLink="template" routerLinkActive="active">
+        <fa-icon [icon]="faCopy"></fa-icon>
+        <span class="link-text">Templates</span>
+      </a>
+    </li>
+    <li *ngIf="isAdmin">
+      <a routerLink="users" routerLinkActive="active">
+        <fa-icon [icon]="faUser"></fa-icon>
+        <span class="link-text">Gebruikers</span>
+      </a>
+    </li>
+    <div class="lessImportantLinks" *ngIf="isAdmin">
+      <p class="mb-0 headerString">Overig</p>
+      <li class="mb-2">
+        <a routerLink="fields" class="aLessImportantLink" routerLinkActive="active">
+          <fa-icon [icon]="faFileAlt"></fa-icon>
+          <span class="link-text">Contract velden</span>
+        </a>
+      </li>
+      <li class="mb-2">
+        <a routerLink="categories" class="aLessImportantLink" routerLinkActive="active">
+          <fa-icon [icon]="faFileAlt"></fa-icon>
+          <span class="link-text">Contract categoriëen</span>
+        </a>
+      </li>
+    </div>
+  </ul>
+  <ul class="bottom-links">
+    <li>
+      <a routerLink="account" routerLinkActive="active"><fa-icon [icon]="faUserCircle"></fa-icon><span
+          class="link-text">Account</span></a>
+    </li>
+    <li class="mt-2">
+      <a href="login" class="logoutBtn" (click)="logOut()"><fa-icon [icon]="faSignOutAlt"></fa-icon><span
+          class="link-text">Log uit</span></a>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,21 @@
+$purple: #280223;
+$yellow: #FFFF00;
+
+.btn {
+  color: $purple;
+  background-color: $yellow;
+  &:hover {
+    color: $yellow;
+    background-color: $purple;
+  }
+}
+
+.normalText {
+  font-weight: 500;
+}
+
+.content {
+    td {
+        font-weight: 400;
+    }
+}

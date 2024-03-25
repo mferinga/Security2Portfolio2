@@ -1,0 +1,63 @@
+<div>
+    <h3 *ngIf="!isEdit">Gebruiker aanmaken</h3>
+    <h3 *ngIf="isEdit">Gebruiker bewerken</h3>
+    <form (ngSubmit)="onSubmit()" #newUserForm="ngForm">
+        <div class="row create-user-form">
+            <div class="col">
+                <label for="name">Naam:</label><br>
+                <input [(ngModel)]="newUser.name" class="form-control" #name="ngModel" type="text" id="name" name="name" required minlength="1">
+                <br *ngIf="name.valid || !name.touched">
+                <p class="error" *ngIf="!name.valid && name.touched" style="color:red">*Vul een naam in.</p>
+
+                <label for="password">Wachtwoord:</label><br>
+                <input [(ngModel)]="newPassword" class="form-control" #newPasswordInput="ngModel" type="password" id="newPasswordInput" name="newPasswordInput" minlength="6">
+                <br *ngIf="newPasswordInput.valid || !newPasswordInput.touched">
+                <p class="error" *ngIf="!newPasswordInput.valid && newPasswordInput.touched" style="color:red">*Minimaal 6 karakters.</p>
+
+                <label for="confirmPassword">Herhaal wachtwoord:</label><br>
+                <input [(ngModel)]="newConfirmPassword" class="form-control" type="password" id="confirmPassword" name="confirmPassword">
+                <br *ngIf="newConfirmPassword == newPassword">
+                <p class="error" style="color: red;" *ngIf="newConfirmPassword != newPassword">*Het bevestigde wachtwoord is niet hetzelfde!</p>
+            </div>
+            <div class="col">
+                <label for="email">E-mailadres:</label><br>
+                <input [(ngModel)]="newUser.email" class="form-control" type="email" id="email" name="email" #email="ngModel" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,4}$">
+                <br *ngIf="email.valid || !email.touched">
+                <p class="error" *ngIf="!email.valid && email.touched" style="color:red">*Vul een valide email in.</p>
+
+                <label for="jobTitle">Baanpositie:</label><br>
+                <input [(ngModel)]="newUser.jobTitle" class="form-control" type="text" id="jobTitle" name="jobTitle" #jobTitle="ngModel" required minlength="1">
+                <br *ngIf="jobTitle.valid || !jobTitle.touched">
+                <p class="error" *ngIf="!jobTitle.valid && jobTitle.touched" style="color:red">*Vul een baanpositie in.</p>
+
+                <label for="role">Rol:</label><br>
+                <select [(ngModel)]="newUser.role" class="form-select rolSelectBtn" type="text" id="role" name="role" (change)="emptySelectedOrganisation()">
+                    <option *ngFor="let role of role" [value]="role"> {{role}} </option>
+                </select>
+            </div>
+        </div>
+            <div *ngIf="newUser.role == keyRole.Sales" class="row mt-2">
+                <label class="mt-2" for="organisations">Werkt bij:</label>
+                <div class="row row-cols-4 gy-4 pb-5 organisations">
+                    <div *ngFor="let org of organisations" class="col">
+                        <div id="{{org.name}}-id" (click)="selectOrganisation(org)" class="card p-3">
+                            <div class="row">
+                                <img src="{{ org.organisationImage }}" alt="{{org.name}}-img" />
+                                <div class="name">
+                                    <p class="m-0">{{ org.name }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="error" *ngIf="selectedOrganisations.length < 1" style="color:red">*Een salespersoon moet bij tenminste 1 organisatie horen.</p>
+                <p *ngIf="wrongEmail" style="color:red">* Dit email-adres is al in gebruik.</p>
+            </div>
+            <div class="form-field mt-4 row">
+            <div class="d-flex justify-content-end">
+                <button *ngIf="!isEdit" type="submit" [disabled]="!newUserForm.valid || (newConfirmPassword != newPassword) || selectedOrganisations.length < 1 && newUser.role == keyRole.Sales" class="primary-btn">Maak aan</button>
+                <button *ngIf="isEdit" type="submit" [disabled]="!newUserForm.valid || (newConfirmPassword != newPassword) || selectedOrganisations.length < 1 && newUser.role == keyRole.Sales" class="primary-btn">Bewerk gebruiker</button>
+            </div>
+        </div>
+    </form>
+</div>

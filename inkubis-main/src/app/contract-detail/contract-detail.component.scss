@@ -1,0 +1,76 @@
+@import 'src/styles';
+
+$pageheader: #c95478;
+
+h2 {
+  span {
+    color: $pageheader;
+  }
+  margin-bottom: 20px;
+}
+
+.information {
+  .card {
+    width: 400px;
+  }
+}
+
+.response {
+  align-items: center;
+  margin-bottom: 10px;
+  .card {
+    width: 100%;
+    padding-bottom: 0;
+    .field, .specification {
+      padding: 8px;
+    }
+    hr {
+      width: 98%;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.backBtn {
+  width: fit-content;
+  margin-bottom: 20px;
+  color: black;
+  text-decoration: none;
+  &:hover {
+    color: black;
+    text-decoration: underline;
+  }
+}
+
+.actionBtns {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-span {
+  margin-left: 10px;
+}
+
+.date-span {
+  margin-left: 16px;
+}
+
+.primary-btn {
+  width: 140px;
+  text-align: center;
+}
+.secondary-btn {
+  width: 140px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.contractDetails {
+  width: fit-content;
+  position: relative;
+  top: -50px;
+  display: flex;
+  gap: 60px;
+}

@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <h4>Dit komt in het contract</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <h5>Organisatie:</h5>
+        </div>
+        <div class="col-2">
+            <div *ngIf="organisation != null">
+                <div id="organisation" class="card">
+                    <img class="w-100" src="{{ organisation.organisationImage }}" alt="{{organisation.name}}-img">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h4>Titel van contract: <span class="notBold" >{{contract?.title}}</span></h4>
+        <div class="d-flex">
+            <div>
+                <h4>Klant informatie</h4>
+                <h5>Naam: <span class="notBold fs-6">{{contract?.customer?.name}}</span></h5>
+                <h5>Baanpositie: <span class="notBold fs-6">{{contract?.customer?.jobTitle}}</span></h5>
+            </div>
+            <div style="margin-left: 35%;">
+                <h4>Leverancier informatie</h4>
+                <h5>Naam: <span class="notBold fs-6">{{contract?.supplier?.name}}</span></h5>
+                <h5>Baanpositie: <span class="notBold fs-6">{{contract?.supplier?.jobTitle}}</span></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>Locatiegegevens</h4>
+                <h5>Adres: <span class="notBold fs-6">{{contract?.customer?.address}}</span></h5>
+                <h5>Postcode: <span class="notBold fs-6">{{contract?.customer?.postalCode}}</span></h5>
+                <h5>Stad: <span class="notBold fs-6">{{contract?.customer?.city}}</span></h5>
+                <h5>Land: <span class="notBold fs-6">{{contract?.customer?.country}}</span></h5>
+            </div>
+            <div class="col">
+                <h4>Signeergegevens</h4>
+                <h5>Datum van tekenen: <span class="notBold fs-6">{{contract?.dateOfSigning | date: 'dd-MM-yyyy'}}</span></h5>
+                <h5>Locatie van tekenen: <span class="notBold fs-6">{{contract?.locationOfSigning}}</span></h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div *ngIf="sortedArray.length">
+            <h4>Je geselecteerde velden zijn:</h4>
+        </div>
+         <div  *ngFor="let obj of sortedArray" >
+            <div *ngIf="obj.responses">
+
+               <div *ngIf="obj.responses.length">
+                <p><b>{{obj.category}}</b></p>
+                <div *ngFor="let response of obj.responses" class="card">
+                    
+                    <div><p class="m-0 field">{{response.field!.name}}</p></div>
+                    <div *ngIf="response.field!.isSpecifiable">
+                    <div *ngIf="response.data">
+                        <hr class="mx-auto">
+                        <p class="m-0 response">Specificatie: {{response.data}}</p>
+                    </div>
+                    <hr *ngIf="!(response.data)" class="mx-auto noResponse">
+                </div>
+
+               </div>
+            </div>
+        </div>
+    </div>
+</div>

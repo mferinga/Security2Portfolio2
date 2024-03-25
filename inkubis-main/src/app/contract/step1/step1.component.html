@@ -1,0 +1,15 @@
+<div>
+  <h3>Selecteer de bijbehorende organisatie</h3>
+  <div class="row row-cols-4 gy-4 pb-5">
+    <div *ngFor="let org of organisations" class="col">
+      <div id="{{org.name}}-id" (click)="selectOrganisation(org)" class="card p-3">
+        <div class="row">
+          <img src="{{ org.organisationImage }}" alt="{{org.name}}-img" />
+          <div class="name">
+            <p class="m-0">{{ org.name }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

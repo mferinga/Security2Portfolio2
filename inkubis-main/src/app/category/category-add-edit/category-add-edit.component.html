@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div>
+            <h2 *ngIf="!categoryExists" class="d-inline">Nieuw categorie aanmaken</h2>
+            <h2 *ngIf="categoryExists" class="d-inline">Edit categorie: {{category.name}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <form #newCategoryForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="name" class="form-label">Categorie naam:</label>
+                <input [(ngModel)]="category.name" #name="ngModel" name="name" type="text" class="form-control"
+                    id="name" [value]="category.name" required minlength="1" placeholder="bv: Betrokkenen">
+                <p *ngIf="!name.valid && name.touched" style="color:red">*Vul een naam in.</p>
+                <p *ngIf="categoryNameExists" style="color: red;" class="mt-1">*{{errorMessage}}</p>
+            </div>
+
+            <div>
+                <p>Volgorde</p>
+                <div class="row row-cols-2">
+                    <div class="col">
+                        <p>Current priority: {{this.category.priority}}</p>
+                        <button (click)="minusOnePriority()" type="button" class="primary-btn">Up</button>
+                        <button (click)="plusOnePriority()" type="button" class="secondary-btn">Down</button>
+                    </div>
+                    <div class="col">
+                        <div #cats *ngFor="let cat of sortedCategoryList">
+
+                            <p>{{cat.name}}</p>
+                            <!-- <p *ngIf="cat.name == category.name">{{category.name}} : {{category.priority}}</p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button *ngIf="!categoryExists" [disabled]="!newCategoryForm.valid" type="submit"
+                class="primary-btn">Categorie toevoegen</button>
+            <button *ngIf="categoryExists" [disabled]="!newCategoryForm.valid" type="submit"
+                class="primary-btn">Categorie veranderen</button>
+            <button class="secondary-btn ms-2" routerLink="/categories">Terug</button>
+        </form>
+    </div>
+</div>

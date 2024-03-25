@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="mb-3">
+            <h2 class="d-inline">Contract velden</h2>
+            <button class="primary-btn d-inline float-end" routerLink="create">
+                Nieuw veld <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div *ngFor="let category of fieldsByCategory">
+            <h4>{{category.name}}</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-6">Veld</th>
+                        <th class="col-3">Shortcode</th>
+                        <th class="col-1">Specificeerbaar</th>
+                        <th class="col-1"></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let field of category.fields">
+                    <tr>
+                        <td class="col-6 normalText">{{field.name}}</td>
+                        <td class="col-3">{{field.shortcodeName}}</td>
+                        <td class="col-1"><fa-icon *ngIf="!field.isSpecifiable" [icon]="faTimes"></fa-icon><fa-icon
+                                *ngIf="field.isSpecifiable" [icon]="faCheck"></fa-icon></td>
+                        <td class="col-1">
+                            <a style="color: gold; margin-right: 20px;" routerLink="edit/{{field.id}}"><fa-icon [icon]="faPencilAlt"></fa-icon></a>
+                            <a style="color: red; cursor: pointer;" (click)="confirmationPrompt?.openModal(field.id)"><fa-icon [icon]="faTrash"></fa-icon></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<app-confirmation-prompt [deleteFunction]="deleteField"></app-confirmation-prompt>

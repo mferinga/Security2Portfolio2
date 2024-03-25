@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="mb-4">
+      <h2 class="d-inline">Templates</h2>
+      <button class="primary-btn d-inline float-end" routerLink="create">
+        Nieuw template <fa-icon [icon]="faPlus"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row row-cols-3 gy-4 pb-5">
+    <div *ngFor="let template of templates" class="col">
+      <div class="card p-3">
+        <div class="row">
+          <img [src]="template.safeTemplateImage" alt="" />
+          <div class="name">
+            <p class="m-0">{{ template.name }}</p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <div class="m-2">
+            <button class="primary-btn d-inline float-end info" routerLink="edit/{{ template.id }}">
+              <fa-icon [icon]="faPencilAlt"></fa-icon>
+            </button>
+          </div>
+          <div class="m-2">
+            <button class="primary-btn d-inline float-end info" (click)="confirmationPrompt?.openModal(template.id)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-confirmation-prompt [deleteFunction]="deleteTemplate"></app-confirmation-prompt>

@@ -1,0 +1,84 @@
+<div class="container mb-3">
+  <div class="row">
+    <h2 *ngIf="!(isEditing)">Bedrijf aanmaken</h2>
+    <h2 *ngIf="isEditing">Bedrijf bewerken</h2>
+  </div>
+  <div>
+    <div class="row">
+      <form #createOrganisationForm="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-field row">
+          <div class="col-6">
+            <label for="name" class="form-label">Naam bedrijf</label>
+            <input required class="form-control pe-5" [(ngModel)]="organisation.name" type="text" name="name" id="name"
+              placeholder="Typ hier de bedrijfsnaam" #name="ngModel" />
+              <p *ngIf="!name.valid && name.touched" style="color: red;" >*Vul de bedrijfsnaam in.</p>
+          </div>
+          <div class="col-6">
+            <label for="representative" class="form-label">Naam van vertegenwoordiger</label>
+            <input required class="form-control pe-5" [(ngModel)]="organisation.representative" type="text"
+              name="representative" id="representative" placeholder="Typ hier de naam van de vertegenwoordiger in"
+              #representative="ngModel" />
+              <p *ngIf="!representative.valid && representative.touched" style="color: red;" >*Vul de naam van de vertegenwoordiger in.</p>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="kvk" class="form-label">KvK-nummer/ondernemingsnummer</label>
+          <input required class="form-control pe-5" [(ngModel)]="organisation.organisationIdentifier" type="text"
+            name="kvk" id="kvk" placeholder="Typ hier het kvk/ondernemingsnummer" #kvk="ngModel" />
+            <p *ngIf="!kvk.valid && kvk.touched" style="color: red;" >*Vul het kvk/ondernemingsnummer in.</p>
+        </div>
+        <div class="form-field row">
+          <div class="col-6">
+            <label for="address" class="form-label">Adres</label>
+            <input required class="form-control pe-5" [(ngModel)]="organisation.address" type="text" name="address"
+              id="address" placeholder="Typ hier het adres in" #address="ngModel" />
+              <p *ngIf="!address.valid && address.touched" style="color: red;" >*Vul het adres in.</p>
+          </div>
+          <div class="col-6">
+            <label for="zipcode" class="form-label">Postcode</label>
+            <input required class="form-control pe-5" [(ngModel)]="organisation.zipcode" type="text" name="zipcode"
+              id="zipcode" placeholder="Typ hier de postcode in" #zipcode="ngModel" />
+              <p *ngIf="!zipcode.valid && zipcode.touched" style="color: red;" >*Vul de postcode in.</p>
+          </div>
+        </div>
+
+        <div class="form-field row">
+          <div class="col-6">
+            <label for="city" class="form-label">Stad</label>
+            <input required class="form-control pe-5" [(ngModel)]="organisation.city" type="text" name="city" id="city"
+              placeholder="Typ hier de stad in" #city="ngModel" />
+              <p *ngIf="!city.valid && city.touched" style="color: red;" >*Vul de stad in.</p>
+          </div>
+          <div class="col-6">
+            <label for="country" class="form-label">Land</label>
+            <input required class="form-control pe-5" [(ngModel)]="organisation.country" type="text" name="country"
+              id="country" placeholder="Typ hier het land in" #country="ngModel" />
+              <p *ngIf="!country.valid && country.touched" style="color: red;" >*Vul het land in.</p>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="logo" class="form-label">Logo bedrijf</label>
+          <input class="form-control pe-5" type="file" accept="image/*" name="logo" id="imageCapturer"
+            #logo="ngModel" [(ngModel)]="imgSrc" (change)="useImage($event)" />
+            <p *ngIf="!logo.valid && logo.touched" style="color: red;" >*Kies een logo.</p>
+        </div>
+        <div *ngIf="imgSrc">
+          <div class="form-field">
+            <p for="logo" class="form-label">Huidige organisatie afbeelding</p>
+            <img class="w-25" [src]="imageBase64" alt="[Organisatie afbeelding]" />
+          </div>
+        </div>
+        <p *ngIf="organisationNameExists" class="mt-2" style="color: red;">Organisatie naam is al in gebruik.</p>
+        <div class="form-field mt-4 row">
+          
+          <div class="d-flex justify-content-end">
+            <button *ngIf="!isEditing" [disabled]="!createOrganisationForm.valid" type="submit" class="primary-btn">Maak aan</button>
+            <button *ngIf="isEditing" [disabled]="!createOrganisationForm.valid" type="submit" class="primary-btn">Maak bewerking</button>
+            <button class="secondary-btn" routerLink="/organisations/{{organisation.id}}">Terug</button>
+          </div>
+        </div>        
+      </form>
+    </div>
+  </div>
+</div>

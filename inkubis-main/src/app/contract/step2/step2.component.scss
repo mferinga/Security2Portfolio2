@@ -1,0 +1,98 @@
+$pink: #c95478;
+$purple: #280223;
+$yellow: #ffff00;
+
+* {
+  color: #280223;
+}
+
+.textarea-row {
+  padding-right: 5rem !important;
+  padding-left: 5rem !important;
+
+  span {
+    width: fit-content;
+  }
+}
+
+textarea {
+  height: 0;
+  opacity: 0;
+  border: solid $purple 0;
+  transition: all 0.3s;
+}
+
+.visible {
+  opacity: 1;
+  height: 100px;
+  border: solid $purple 2px;
+}
+
+.checkbox {
+  display: inline-flex;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox > span {
+  padding: 0.5rem 0.25rem;
+}
+
+.checkbox > input {
+  height: 25px;
+  width: 25px;
+  background-color: #d9d9d9;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  outline: none;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+.checkbox > input:checked + span::before {
+  content: "\2713";
+  display: block;
+  text-align: center;
+  color: $pink;
+  position: absolute;
+  left: 0;
+  top: -1rem;
+  font-size: 40px;
+}
+
+.checkbox > input:active {
+  border: 2px solid $pink;
+}
+
+.checkbox-label {
+  position: relative;
+}
+
+.overlay {
+  height: 0;
+  overflow: visible;
+  pointer-events: none;
+  background: none !important;
+}
+
+.supplierSelectBtn {
+  border-radius: 0;
+  width: 30%;
+}
+.input-validation {
+  p {
+    color : red;
+  }
+  
+}
+.error-input {
+
+    &:focus{
+      border: red 2px solid;
+      box-shadow: 0 0 0 0.25rem rgba(253, 13, 13, 0.25);
+
+    }
+  
+}

@@ -1,0 +1,66 @@
+@import 'src/styles';
+
+$purple: #280223;
+$yellow: #FFFF00;
+
+* {
+    font-weight: 600 !important;
+}
+
+.card {
+    border-radius: 0px;
+
+    hr {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    img {
+        height: 120px;
+
+        object-fit: contain;
+    }
+
+    color: $purple;
+
+}
+
+.contract-span {
+    padding-left: 16px;
+}
+
+.people-span {
+    padding-left: 10px;
+
+}
+
+h2 {
+    color: $purple;
+}
+
+
+.name p {
+    background-color: #280223;
+    color: white;
+    padding: 3px 12px;
+    width: fit-content;
+}
+
+.container {
+    background-color: white !important;
+
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.btn {
+    color: $purple;
+    background-color: $yellow;
+
+    &:hover {
+        color: $yellow;
+        background-color: $purple;
+    }
+}

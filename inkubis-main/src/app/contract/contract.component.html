@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="row">
+      <div class="mb-0">
+        <h2 class="d-inline">Nieuw contract aanmaken</h2>
+      </div>
+      <div class="row gy-4 pb-5 stepBar">
+        <div class="col-4 d-flex step {{ step1Status }}">
+          <div class="stepNumber">
+            <p>1</p>
+          </div>
+          <div class="stepContent">Organisatie</div>
+          <div class="stepLine"></div>
+        </div>
+        <div class="col-4 d-flex step {{ step2Status }}">
+          <div class="stepNumber">2</div>
+          <div class="stepContent">Content selectie</div>
+          <div class="stepLine"></div>
+        </div>
+        <div class="col-3 d-flex step {{ step3Status }}">
+          <div class="stepNumber">3</div>
+          <div class="stepContent">Afronding</div>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: 95px">
+        <router-outlet #currentStep (activate)="onActivate($event)" (deactivate)="onDeactivate($event)"></router-outlet>
+      </div>
+      <div class="row">
+        <div class="my-5 switchBtns">
+          <!-- Step 2 en 3 -->
+          <button *ngIf="currentRouterStep != '/contracts/create/step1'" (click)="previousStep()" class="primary-btn">
+            <fa-icon [icon]="faArrowLeft"></fa-icon> Terug
+          </button>
+          <!-- Step 1 en 2 -->
+          <button *ngIf="currentRouterStep != '/contracts/create/step3' && !formIsValid" disabled (click)="nextStep()"
+            class="primary-btn float-end">
+            Volgende <fa-icon [icon]="faArrowRight"></fa-icon>
+          </button>
+          <button *ngIf="currentRouterStep != '/contracts/create/step3' && formIsValid" (click)="nextStep()"
+            class="primary-btn float-end">
+            Volgende <fa-icon [icon]="faArrowRight"></fa-icon>
+          </button>
+          <!-- Step 3 -->
+          <button *ngIf="currentRouterStep == '/contracts/create/step3'" (click)="finishNewContract()"
+            class="primary-btn float-end">
+            Voltooien <fa-icon [icon]="faCheck"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

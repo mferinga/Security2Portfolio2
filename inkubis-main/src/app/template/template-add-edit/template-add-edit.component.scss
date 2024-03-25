@@ -1,0 +1,41 @@
+$purple: #280223;
+$yellow: #FFFF00;
+
+* {
+    font-weight: 600 !important;
+}
+
+.form-field {
+    margin-top: 20px;
+
+    label {
+        margin-bottom: 0px;
+    }
+
+    input {
+        border-radius: 0px;
+        border-color: $purple;
+
+        &:focus-visible {
+
+            outline: none;
+        }
+    }
+
+    .btn {
+        font-weight: 600;
+        color: $yellow;
+        background-color: $purple;
+
+        &:hover {
+            color: $purple;
+            background-color: $yellow;
+        }
+    }
+}
+
+.container {
+    color: $purple;
+    background-color: white !important;
+    font-weight: 600;
+}
