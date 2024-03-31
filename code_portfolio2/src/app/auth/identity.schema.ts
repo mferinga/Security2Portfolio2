@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
-import isEmail from 'validator/lib/isEmail';
 
 export type IdentityDocument = Identity & Document;
 
@@ -13,10 +12,7 @@ export class Identity {
 	@Prop({
 		required: true,
 		unique: true,
-		validate: {
-			validator: isEmail,
-			message: 'should be a valid email',
-		},
+		match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'] 
 	})
 	email: string;
 

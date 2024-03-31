@@ -191,7 +191,10 @@ export class AuthService {
 		});
 	}
 
+
 	async registerUser(email: string, password: string) {
+		
+		
 		const generatedHash = await this.hashPassword(password);
 
 		const identity = new this.identityModel({
