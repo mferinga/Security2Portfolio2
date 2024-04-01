@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddc276dd-5926-4d8e-8443-05bac44ab07f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_portfolio2/src/app/models/auth.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code_portfolio2/src/app/models/auth.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_portfolio2/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/code_portfolio2/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code_portfolio2/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code_portfolio2/src/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +46,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "mitigations",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/jaron/projects/Security2Portfolio2/code_portfolio2",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/jaron/projects/Security2Portfolio2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -76,46 +78,12 @@
       <workItem from="1711976908674" duration="266000" />
       <workItem from="1711977275206" duration="798000" />
       <workItem from="1711978090108" duration="3672000" />
+      <workItem from="1711985810090" duration="409000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/contract/contract.schema.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/contract/contract.service.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/contract/contract.controller.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/category/category.schema.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/category/category.service.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/category/category.controller.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/models/auth.model.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/template/template.service.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/template/template.schema.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/template/template.controller.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/field/field.schema.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/field/field.service.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/field/field.controller.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/organisation/organisation.schema.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/organisation/organisation.controller.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/organisation/organisation.service.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/main.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/app.module.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/data.module.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/auth/auth.module.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/auth/token.decorator.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/auth/identity.schema.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/auth/token.middleware.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/auth/auth.service.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/auth/auth.controller.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/response/response.schema.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/roles/roles.guard.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/user/user.controller.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/user/user.schema.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/user/user.service.js" />
-        <option value="$PROJECT_DIR$/code_portfolio2/src/app/customer/customer.schema.js" />
-      </list>
-    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

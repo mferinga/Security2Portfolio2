@@ -6,14 +6,24 @@ import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app/app.module';
 import { urlencoded, json } from 'express';
+import * as fs from "fs";
+import * as process from "process";
 
 async function bootstrap() {
-	const app = await NestFactory.create(AppModule);
 	const globalPrefix = 'api';
 
 	const origin = process.env.ORIGIN || 'http://localhost:4200';
 
 	const port = process.env.PORT || 3333;
+
+	const httpsOptions = {
+		key: fs.readFileSync(process.env.PRIVATE_KEY || '../key.pem'),
+		cert: fs.readFileSync(process.env.CERTIFICATE || '../cert.pem'),
+	};
+
+	const app = await NestFactory.create(AppModule, {
+		httpsOptions,
+	});
 
 	app.setGlobalPrefix(globalPrefix);
 	app.use(json({ limit: '10mb' }));
