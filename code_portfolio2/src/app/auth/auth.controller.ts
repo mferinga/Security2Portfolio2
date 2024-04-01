@@ -43,7 +43,6 @@ export class AuthController {
 					newUser.name,
 					newUser.email,
 					newUser.jobTitle,
-					newUser.role,
 					newUser.organisations,
 				),
 			};

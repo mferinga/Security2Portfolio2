@@ -27,7 +27,6 @@ export class AuthService {
 		name: string,
 		email: string,
 		jobTitle: string,
-		role: Role,
 		orgId: string[],
 	): Promise<string> {
 		var organisations = await this.organisationService.getOrganisationsById(
@@ -39,7 +38,6 @@ export class AuthService {
 			name: name,
 			email,
 			jobTitle,
-			role,
 			organisations,
 		});
 
@@ -76,7 +74,7 @@ export class AuthService {
 				jobTitle,
 				role,
 				organisations,
-			}, 
+			},
 			{
 				new: true,
 			}
@@ -92,7 +90,7 @@ export class AuthService {
 	}
 
 	async editUser(userId: string, identity: any) {
-		
+
 		const oldUser = await this.identityModel.findOne({
 			id: userId,
 		});
@@ -137,7 +135,7 @@ export class AuthService {
 				const oldPassword = identity.oldPassword;
 
 				if (identity.oldPassword != null) {
-					
+
 					if (!oldUser || !(await compare(oldPassword, oldUser.hash))) {
 						throw new HttpException(
 							'Old password is incorrect',
@@ -193,8 +191,8 @@ export class AuthService {
 
 
 	async registerUser(email: string, password: string) {
-		
-		
+
+
 		const generatedHash = await this.hashPassword(password);
 
 		const identity = new this.identityModel({
@@ -245,6 +243,7 @@ export class AuthService {
 			sign(
 				{ id: user.id },
 				process.env.JWT_SECRET,
+				{ expiresIn: 60 * 15 /* 15 minutes */ },
 				(err: Error, token: string) => {
 					if (err) reject(err);
 					else resolve(token);

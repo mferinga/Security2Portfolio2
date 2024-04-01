@@ -1,9 +1,25 @@
-export interface UserCredentials {
+import { IsEmail, IsNotEmpty, IsStrongPassword, minLength } from "class-validator";
+
+export class UserCredentials implements UserCredentialsInterface {
+	@IsEmail()
+	@IsNotEmpty()
+	email: string;
+
+	@IsStrongPassword({
+		minLength: 8,
+		minLowercase: 2,
+		minSymbols: 2,
+		minUppercase: 2,
+	})
+	password: string;
+}
+
+export interface UserCredentialsInterface {
 	email: string;
 	password: string;
 }
 
-export interface UserRegistration extends UserCredentials {
+export class UserRegistration extends UserCredentials {
 	name: string;
 	jobTitle: string;
 	role: Role;
@@ -11,20 +27,20 @@ export interface UserRegistration extends UserCredentials {
 }
 
 export enum Role {
-	Admin = 'admin',
 	Sales = 'sales',
+	Admin = 'admin',
 }
 
-export interface IdentityModel {
+export class IdentityModel {
 	email: string;
 	oldPassword: string;
 	newPassword: string;
 }
 
-export interface TokenString {
+export class TokenString {
 	token: string;
 }
 
-export interface ResourceId {
+export class ResourceId {
 	id: string;
 }

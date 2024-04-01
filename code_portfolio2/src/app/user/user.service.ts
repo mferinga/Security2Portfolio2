@@ -16,7 +16,7 @@ export class UserService {
 	// ##### User #####
 
 	async getAllUsers(): Promise<User[]> {
-		return this.userModel.find().populate('organisations','name');
+		return this.userModel.find().populate('organisations', 'name');
 	}
 
 	async getAllUsersByRole(role: Role): Promise<User[]> {
@@ -30,7 +30,7 @@ export class UserService {
 	}
 
 	async getOrganisationsFromUser(userId: string): Promise<Organisation[]> {
-		return this.userModel.findOne({ id: userId}).populate('organisations');
+		return this.userModel.findOne({ id: userId }).populate('organisations');
 	}
 
 	async editUser(id: string, user: User): Promise<User> {
@@ -67,19 +67,17 @@ export class UserService {
 	}
 
 	async getUserById(userId: string): Promise<User> {
-		const user = this.userModel
-			.findOne({ id: userId })
-			.populate({
-				path: 'organisations',
-				select: {
-					'organisationImage': 0,
-				}
-			});
-			if (user == null) {
-				throw new HttpException('Contract not found', HttpStatus.NOT_FOUND);
-			}
-	
-			return user;
+		const user = this.userModel.findOne({ id: userId }).populate({
+			path: 'organisations',
+			select: {
+				organisationImage: 0,
+			},
+		});
+		if (user == null) {
+			throw new HttpException('Contract not found', HttpStatus.NOT_FOUND);
+		}
+
+		return user;
 	}
 
 	getUsersFromOrganisation(organisation: Organisation) {
@@ -98,7 +96,7 @@ export class UserService {
 				HttpStatus.BAD_REQUEST,
 			);
 
-		let toBeDeletedIdentity = await this.identityModel.findOneAndDelete({
+		const toBeDeletedIdentity = await this.identityModel.findOneAndDelete({
 			id: id,
 		});
 
@@ -114,7 +112,9 @@ export class UserService {
 				HttpStatus.BAD_REQUEST,
 			);
 
-		let toBeDeletedUser = await this.userModel.findOneAndDelete({ id: id });
+		const toBeDeletedUser = await this.userModel.findOneAndDelete({
+			id: id,
+		});
 
 		if (toBeDeletedUser == null)
 			throw new HttpException('User not found ', HttpStatus.NOT_FOUND);
