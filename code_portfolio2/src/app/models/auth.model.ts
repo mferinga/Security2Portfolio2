@@ -32,8 +32,24 @@ export enum Role {
 }
 
 export class IdentityModel {
+	@IsEmail()
+	@IsNotEmpty()
 	email: string;
+
+	@IsStrongPassword({
+		minLength: 8,
+		minLowercase: 2,
+		minSymbols: 2,
+		minUppercase: 2,
+	})
 	oldPassword: string;
+
+	@IsStrongPassword({
+		minLength: 8,
+		minLowercase: 2,
+		minSymbols: 2,
+		minUppercase: 2,
+	})
 	newPassword: string;
 }
 

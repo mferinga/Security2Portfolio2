@@ -29,9 +29,8 @@ export class AuthService {
 		jobTitle: string,
 		orgId: string[],
 	): Promise<string> {
-		var organisations = await this.organisationService.getOrganisationsById(
-			orgId,
-		);
+		const organisations =
+			await this.organisationService.getOrganisationsById(orgId);
 
 		const user = new this.userModel({
 			id: id,
@@ -57,40 +56,38 @@ export class AuthService {
 		name: string,
 		email: string,
 		jobTitle: string,
-		role: Role,
 		orgId: string[],
 	): Promise<any> {
-		var organisations = await this.organisationService.getOrganisationsById(
-			orgId,
-		);
+		const organisations =
+			await this.organisationService.getOrganisationsById(orgId);
 
-		const user = await this.userModel.findOneAndUpdate(
-			{
-				id: userId
-			},
-			{
-				name,
-				email,
-				jobTitle,
-				role,
-				organisations,
-			},
-			{
-				new: true,
-			}
-		).catch((err) => {
-			if (err.code == 11000) {
-				throw new HttpException(
-					'Email `' + email + '` already exists',
-					HttpStatus.BAD_REQUEST,
-				);
-			}
-		});
+		const user = await this.userModel
+			.findOneAndUpdate(
+				{
+					id: userId,
+				},
+				{
+					name,
+					email,
+					jobTitle,
+					organisations,
+				},
+				{
+					new: true,
+				},
+			)
+			.catch((err) => {
+				if (err.code == 11000) {
+					throw new HttpException(
+						'Email `' + email + '` already exists',
+						HttpStatus.BAD_REQUEST,
+					);
+				}
+			});
 		return user;
 	}
 
 	async editUser(userId: string, identity: any) {
-
 		const oldUser = await this.identityModel.findOne({
 			id: userId,
 		});
@@ -135,8 +132,10 @@ export class AuthService {
 				const oldPassword = identity.oldPassword;
 
 				if (identity.oldPassword != null) {
-
-					if (!oldUser || !(await compare(oldPassword, oldUser.hash))) {
+					if (
+						!oldUser ||
+						!(await compare(oldPassword, oldUser.hash))
+					) {
 						throw new HttpException(
 							'Old password is incorrect',
 							HttpStatus.UNAUTHORIZED,
@@ -189,10 +188,7 @@ export class AuthService {
 		});
 	}
 
-
 	async registerUser(email: string, password: string) {
-
-
 		const generatedHash = await this.hashPassword(password);
 
 		const identity = new this.identityModel({

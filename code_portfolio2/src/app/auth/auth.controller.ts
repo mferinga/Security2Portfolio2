@@ -74,19 +74,21 @@ export class AuthController {
 
 	@Put(':id')
 	@UseGuards(RolesGuard)
-	async editUserById(@Param('id') userId: string, @Body() userInfo: UserRegistration): Promise<User> {
+	async editUserById(
+		@Param('id') userId: string,
+		@Body() userInfo: UserRegistration,
+	): Promise<User> {
 		let identityUser = null;
 		try {
 			identityUser = await this.authService.editUser(userId, userInfo);
 
 			return await this.authService.editUserInfo(
-					userId,
-					userInfo.name,
-					userInfo.email,
-					userInfo.jobTitle,
-					userInfo.role,
-					userInfo.organisations
-				);
+				userId,
+				userInfo.name,
+				userInfo.email,
+				userInfo.jobTitle,
+				userInfo.organisations,
+			);
 		} catch (e) {
 			console.log(e);
 
