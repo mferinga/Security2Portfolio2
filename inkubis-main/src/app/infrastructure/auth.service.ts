@@ -18,7 +18,7 @@ export class AuthService {
 
     constructor(private httpClient: HttpClient) { }
 
-    private url = 'http://localhost:3333/api/auth';
+    private url = 'https://localhost:3333/api/auth';
 
     getToken(): string {
         return JSON.parse(localStorage.getItem('token') || '');

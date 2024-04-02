@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-
+import Jimp from 'jimp';
 import { TemplateDocument, Template } from './template.schema';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class TemplateService {
 	constructor(
 		@InjectModel(Template.name)
 		private templateModel: Model<TemplateDocument>,
-	) {}
+	) { }
 
 	async getTemplates(): Promise<Template[]> {
 		return await this.templateModel.find().exec();
@@ -95,7 +95,17 @@ export class TemplateService {
 	}
 
 	checkIfBase64(str: string) {
-		if (str.match(/data:image\/(png|jpg|jpeg);base64,/)) return true;
+		if (str.match(/data:image\/(png|jpg|jpeg);base64,/)) {
+			Jimp.read(str).then(function (img) {
+				console.log(img.bitmap)
+				if (img.bitmap.width > 0 && img.bitmap.height > 0) {
+					return false;
+				}
+				return false;
+			}).catch(function () {
+				return false;
+			});
+		}
 		return false;
 	}
 }

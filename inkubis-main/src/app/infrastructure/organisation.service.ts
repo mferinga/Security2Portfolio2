@@ -9,7 +9,7 @@ import { AuthService } from "./auth.service";
 })
 export class OrganisationService {
   constructor(private httpClient: HttpClient, private readonly authService: AuthService) { }
-  private url = 'http://localhost:3333/api/data/organisation';
+  private url = 'https://localhost:3333/api/data/organisation';
 
   getAllOrganisations(): Observable<IOrganisation[]> {
     return this.httpClient

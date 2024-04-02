@@ -12,7 +12,7 @@ import { AuthService } from "./auth.service";
 export class UserService {
     constructor(private httpClient: HttpClient, private readonly authService: AuthService) { }
 
-    private url = 'http://localhost:3333/api/data/user';
+    private url = 'https://localhost:3333/api/data/user';
 
     getToken(): string {
         return JSON.parse(localStorage.getItem('token') || '');
@@ -83,7 +83,7 @@ export class UserService {
             Authorization: `${token}`,
         });
 
-        return this.httpClient.put<IUserCredentials>('http://localhost:3333/api/auth/' + userId, userToUpdate, {
+        return this.httpClient.put<IUserCredentials>('https://localhost:3333/api/auth/' + userId, userToUpdate, {
             headers: headers,
         }).pipe(
             catchError((error) => {

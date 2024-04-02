@@ -9,7 +9,7 @@ import {AuthService} from "./auth.service";
 })
 export class TemplateService {
   constructor(private httpClient: HttpClient, private readonly authService: AuthService) { }
-  private url = 'http://localhost:3333/api/data/template';
+  private url = 'https://localhost:3333/api/data/template';
 
   getAllTemplates(): Observable<ITemplateVM[]> {
     return this.httpClient

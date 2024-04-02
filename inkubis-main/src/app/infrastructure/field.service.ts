@@ -8,7 +8,7 @@ import { AuthService } from "./auth.service";
   providedIn: 'root',
 })
 export class FieldService {
-  private url = 'http://localhost:3333/api/data/field';
+  private url = 'https://localhost:3333/api/data/field';
 
   getToken(): string {
     return JSON.parse(localStorage.getItem('token') || '');
@@ -34,7 +34,7 @@ export class FieldService {
     });
 
     return this.httpClient.post<IField>(
-      'http://localhost:3333/api/data/field',
+      'https://localhost:3333/api/data/field',
       {
         name: field.name,
         category: field.category.id,

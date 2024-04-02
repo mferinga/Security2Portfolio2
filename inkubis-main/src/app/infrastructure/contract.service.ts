@@ -11,7 +11,7 @@ import { AuthService } from "./auth.service";
   providedIn: 'root',
 })
 export class ContractService {
-  private url = 'http://localhost:3333/api/data/contract';
+  private url = 'https://localhost:3333/api/data/contract';
   inMemContract?= new BehaviorSubject<IContract>({
     title: '',
     organisation: '',

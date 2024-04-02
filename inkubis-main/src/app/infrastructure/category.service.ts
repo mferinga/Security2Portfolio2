@@ -8,7 +8,7 @@ import { AuthService } from "./auth.service";
     providedIn: 'root',
 })
 export class CategoryService {
-    private url = 'http://localhost:3333/api/data/category';
+    private url = 'https://localhost:3333/api/data/category';
 
     getToken(): string {
         return JSON.parse(localStorage.getItem('token') || '');
