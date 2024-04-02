@@ -1,8 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import Jimp from 'jimp';
+
 import { TemplateDocument, Template } from './template.schema';
+import Jimp from 'jimp';
 
 @Injectable()
 export class TemplateService {
@@ -20,7 +21,7 @@ export class TemplateService {
 		content: string,
 		templateImage: string,
 	): Promise<Template> {
-		if (!this.checkIfBase64(templateImage))
+		if (await this.checkIfBase64(templateImage) === false)
 			throw new HttpException('Invalid input', HttpStatus.BAD_REQUEST);
 		const template = new this.templateModel({
 			name: name,
@@ -55,7 +56,7 @@ export class TemplateService {
 
 	async updateTemplate(id: string, template: Template): Promise<Template> {
 		if (template.templateImage !== undefined) {
-			if (!this.checkIfBase64(template.templateImage))
+			if (await this.checkIfBase64(template.templateImage) == false)
 				throw new HttpException(
 					'Invalid input',
 					HttpStatus.BAD_REQUEST,
@@ -94,18 +95,20 @@ export class TemplateService {
 		return template;
 	}
 
-	checkIfBase64(str: string) {
+	async checkIfBase64(str: string) {
 		if (str.match(/data:image\/(png|jpg|jpeg);base64,/)) {
-			Jimp.read(str).then(function (img) {
-				console.log(img.bitmap)
+			const buff = Buffer.from(str.split(',')[1], 'base64');
+			const img = await Jimp.read(buff)
+			try {
 				if (img.bitmap.width > 0 && img.bitmap.height > 0) {
-					return false;
+					return true;
 				}
+			} catch (err) {
 				return false;
-			}).catch(function () {
-				return false;
-			});
+			}
+			return false;
 		}
 		return false;
 	}
+
 }
