@@ -133,4 +133,10 @@ export class UserService {
 
 		return false;
 	}
+
+	async getOrganisationIdsFromUser(userId: string): Promise<string[]> {
+		const user = await this.userModel.findOne({ id: userId }).populate('organisations', 'id');
+		const organizationIds = user.organisations.map(org => org.id);
+		return organizationIds;
+	}
 }

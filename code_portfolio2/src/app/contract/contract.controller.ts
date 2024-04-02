@@ -30,8 +30,8 @@ export class ContractController {
 	}
 
 	@Get(':id/organisation')
-	async getContractsByOrganisation(@Param('id') id: string): Promise<any> {
-		return await this.contractService.getContractsByOrganisation(id);
+	async getContractsByOrganisation(@InjectToken() token: Token, @Param('id') id: string): Promise<any> {
+		return await this.contractService.getContractsByOrganisation(token.id , id);
 	}
 
 	@Put(':id')

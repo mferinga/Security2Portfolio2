@@ -15,15 +15,18 @@ import { ContractService } from '../contract/contract.service';
 import { Organisation } from './organisation.schema';
 
 import { OrganisationService } from './organisation.service';
+import { InjectToken, Token } from '../auth/token.decorator';
 
 @Controller('organisation')
 export class OrganisationController {
-	constructor(private readonly organisationService: OrganisationService,
-		private readonly contractService: ContractService) { }
+	constructor(
+		private readonly organisationService: OrganisationService,
+		private readonly contractService: ContractService
+	) { }
 
 	@Get()
-	async getOrganisations() {
-		return await this.organisationService.getOrganisations();
+	async getOrganisations(@InjectToken() token: Token,) {
+		return await this.organisationService.getOrganisations(token.id);
 	}
 
 	@Post()
@@ -79,7 +82,7 @@ export class OrganisationController {
 	}
 
 	@Get(':id/contracts')
-	async getOrganisationContractCount(@Param('id') id: string): Promise<number> {
-		return await this.contractService.getOrganisationContractCount(id);
+	async getOrganisationContractCount(@InjectToken() token: Token, @Param('id') id: string): Promise<number> {
+		return await this.contractService.getOrganisationContractCount(token.id, id);
 	}
 }

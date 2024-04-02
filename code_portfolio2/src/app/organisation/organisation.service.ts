@@ -50,8 +50,9 @@ export class OrganisationService {
 		return organisation;
 	}
 
-	async getOrganisations(): Promise<Organisation[]> {
-		return await this.organisationModel.find();
+	async getOrganisations(userId: string): Promise<Organisation[]> {
+		const organisations = await this.userService.getOrganisationIdsFromUser(userId);	
+		return (await this.organisationModel.find().where('id').in(organisations));
 	}
 
 	async updateOrganisation(

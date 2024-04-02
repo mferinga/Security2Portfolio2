@@ -103,7 +103,7 @@ export class ContractService {
 		return contract;
 	}
 
-	async getContractsByOrganisation(id: string): Promise<any> {
+	async getContractsByOrganisation(userId: string, id: string): Promise<any> {
 		let result = {
 			organisation: null,
 			contracts: null,
@@ -114,7 +114,7 @@ export class ContractService {
 
 		result.contracts = await this.contractModel.find({
 			organisation: result.organisation,
-		});
+		}).select('-lastEditedBy');
 		return result;
 	}
 
@@ -129,8 +129,8 @@ export class ContractService {
 		return contract;
 	}
 
-	async getOrganisationContractCount(id: string): Promise<number> {
-		const result = await this.getContractsByOrganisation(id);
+	async getOrganisationContractCount(userId: string, id: string): Promise<number> {
+		const result = await this.getContractsByOrganisation(userId, id);
 		return result.contracts.length;
 	}
 
